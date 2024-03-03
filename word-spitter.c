@@ -5,6 +5,16 @@ void printGameTitle();
 int main(void)
 {
     printGameTitle();
+
+    // Prompt players for words
+    char playerOneInput[50];
+    char playerTwoInput[50];
+
+    printf("Player 1: ");
+    scanf("%s", playerOneInput);
+
+    printf("Player 2: ");
+    scanf("%s", playerTwoInput);
 }
 
 // Prints Word Spitter title in ASCII art
