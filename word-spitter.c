@@ -26,6 +26,11 @@ int main(void)
     // Compute the score of each word
     int scorePlayerOne = computeScore(playerOneInput);
     int scorePlayerTwo = computeScore(playerTwoInput);
+
+    // Print scores
+    printf("\nFinal scores: \n");
+    printf("Player One scored %i points. \n", scorePlayerOne);
+    printf("Player Two scored %i points. \n\n", scorePlayerTwo);
 }
 
 // Prints Word Spitter title in ASCII art
