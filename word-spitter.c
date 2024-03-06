@@ -22,6 +22,10 @@ int main(void)
 
     printf("Player 2: ");
     scanf("%s", playerTwoInput);
+
+    // Compute the score of each word
+    int scorePlayerOne = computeScore(playerOneInput);
+    int scorePlayerTwo = computeScore(playerTwoInput);
 }
 
 // Prints Word Spitter title in ASCII art
