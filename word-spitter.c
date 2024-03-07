@@ -31,6 +31,20 @@ int main(void)
     printf("\nFinal scores: \n");
     printf("Player One scored %i points. \n", scorePlayerOne);
     printf("Player Two scored %i points. \n\n", scorePlayerTwo);
+
+    // Print the winner
+    if (scorePlayerOne > scorePlayerTwo)
+    {
+        printf("Result: Player 1 wins!\n");
+    }
+    else if (scorePlayerOne < scorePlayerTwo)
+    {
+        printf("Result: Player 2 wins!\n");
+    }
+    else
+    {
+        printf("Result: It's a tie!\n");
+    }
 }
 
 // Prints Word Spitter title in ASCII art
