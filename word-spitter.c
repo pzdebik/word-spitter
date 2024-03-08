@@ -8,6 +8,7 @@ const int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1,
 
 void printGameTitle();
 int computeScore(char word[]);
+void printWinner(int scorePlayerOne, int scorePlayerTwo);
 
 int main(void)
 {
@@ -32,19 +33,7 @@ int main(void)
     printf("Player One scored %i points. \n", scorePlayerOne);
     printf("Player Two scored %i points. \n\n", scorePlayerTwo);
 
-    // Print the winner
-    if (scorePlayerOne > scorePlayerTwo)
-    {
-        printf("Result: Player 1 wins!\n");
-    }
-    else if (scorePlayerOne < scorePlayerTwo)
-    {
-        printf("Result: Player 2 wins!\n");
-    }
-    else
-    {
-        printf("Result: It's a tie!\n");
-    }
+    printWinner(scorePlayerOne, scorePlayerTwo);
 }
 
 // Prints Word Spitter title in ASCII art
@@ -74,5 +63,22 @@ int computeScore(char word[])
         }
     }
     return score;
+}
+
+// Print the winner
+void printWinner(int scorePlayerOne, int scorePlayerTwo)
+{
+    if (scorePlayerOne > scorePlayerTwo)
+    {
+        printf("Result: Player 1 wins!\n");
+    }
+    else if (scorePlayerOne < scorePlayerTwo)
+    {
+        printf("Result: Player 2 wins!\n");
+    }
+    else
+    {
+        printf("Result: It's a tie!\n");
+    }
 }
 
