@@ -34,6 +34,13 @@ int main(void)
     printf("Player Two scored %i points. \n\n", scorePlayerTwo);
 
     printWinner(scorePlayerOne, scorePlayerTwo);
+
+    // Ask user for pressing enter
+    printf("\nPress [Enter] key to exit.\n");
+    fflush(stdin); // option ONE to clean stdin
+    getchar(); // wait for ENTER
+
+    return 0;
 }
 
 // Prints Word Spitter title in ASCII art
