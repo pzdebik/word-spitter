@@ -9,6 +9,7 @@ const int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1,
 void printGameTitle();
 int computeScore(char word[]);
 void printWinner(int scorePlayerOne, int scorePlayerTwo);
+void waitForEnter();
 
 int main(void)
 {
@@ -34,13 +35,7 @@ int main(void)
     printf("Player Two scored %i points. \n\n", scorePlayerTwo);
 
     printWinner(scorePlayerOne, scorePlayerTwo);
-
-    // Ask user for pressing enter
-    printf("\nPress [Enter] key to exit.\n");
-    fflush(stdin); // option ONE to clean stdin
-    getchar(); // wait for ENTER
-
-    return 0;
+    waitForEnter();
 }
 
 // Prints Word Spitter title in ASCII art
@@ -89,3 +84,10 @@ void printWinner(int scorePlayerOne, int scorePlayerTwo)
     }
 }
 
+// Ask user for pressing enter
+void waitForEnter()
+{
+    printf("\nPress [Enter] key to exit.\n");
+    fflush(stdin); // option ONE to clean stdin
+    getchar(); // wait for ENTER
+}
