@@ -15,21 +15,37 @@ int main(void)
 {
     printGameTitle();
 
-    // Prompt players for words
-    char playerOneInput[50];
-    char playerTwoInput[50];
+    int scorePlayerOne = 0;
+    int scorePlayerTwo = 0;
+    int round = 1;
 
-    printf("Player 1: ");
-    scanf("%s", playerOneInput);
+    while(round <= 3)
+    {
+        printf("Round %i\n", round); // Print round
 
-    printf("Player 2: ");
-    scanf("%s", playerTwoInput);
+        // Prompt players for words
+        char playerOneInput[50];
+        char playerTwoInput[50];
 
-    // Compute the score of each word
-    int scorePlayerOne = computeScore(playerOneInput);
-    int scorePlayerTwo = computeScore(playerTwoInput);
+        printf("Player 1: ");
+        scanf("%s", playerOneInput);
 
-    // Print scores
+        printf("Player 2: ");
+        scanf("%s", playerTwoInput);
+        printf("\n");
+
+        // Compute the score of each word
+        scorePlayerOne += computeScore(playerOneInput);
+        scorePlayerTwo += computeScore(playerTwoInput);
+
+        // Print current scores
+        printf("Player One scored %i points. \n", scorePlayerOne);
+        printf("Player Two scored %i points. \n\n", scorePlayerTwo);
+
+        round++;
+    }
+
+    // Print final scores
     printf("\nFinal scores: \n");
     printf("Player One scored %i points. \n", scorePlayerOne);
     printf("Player Two scored %i points. \n\n", scorePlayerTwo);
