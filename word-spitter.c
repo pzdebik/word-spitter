@@ -10,6 +10,7 @@ void printGameTitle();
 int computeScore(char word[]);
 void printWinner(int scorePlayerOne, int scorePlayerTwo);
 void waitForEnter();
+void printPlayerScore(char playerName[50], int finalScore);
 
 int main(void)
 {
@@ -39,16 +40,12 @@ int main(void)
         scorePlayerTwo += computeScore(playerTwoInput);
 
         // Print current scores
-        printf("Player One scored %i points. \n", scorePlayerOne);
-        printf("Player Two scored %i points. \n\n", scorePlayerTwo);
+        printPlayerScore("Player One", scorePlayerOne);
+        printPlayerScore("Player Two", scorePlayerTwo);
+        printf("\n");
 
         round++;
     }
-
-    // Print final scores
-    printf("\nFinal scores: \n");
-    printf("Player One scored %i points. \n", scorePlayerOne);
-    printf("Player Two scored %i points. \n\n", scorePlayerTwo);
 
     printWinner(scorePlayerOne, scorePlayerTwo);
     waitForEnter();
@@ -106,4 +103,10 @@ void waitForEnter()
     printf("\nPress [Enter] key to exit.\n");
     fflush(stdin); // option ONE to clean stdin
     getchar(); // wait for ENTER
+}
+
+// Print score per player
+void printPlayerScore(char playerName[50], int finalScore)
+{
+    printf("%s scored %i points. \n", playerName, finalScore);
 }
