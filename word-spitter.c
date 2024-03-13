@@ -16,6 +16,9 @@ int main(void)
 {
     printGameTitle();
 
+    printf("\nPress [Enter] key to start.\n");
+    waitForEnter();
+
     int scorePlayerOne = 0;
     int scorePlayerTwo = 0;
     int round = 1;
