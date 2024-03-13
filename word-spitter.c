@@ -48,6 +48,8 @@ int main(void)
     }
 
     printWinner(scorePlayerOne, scorePlayerTwo);
+
+    printf("\nPress [Enter] key to exit.\n");
     waitForEnter();
 }
 
@@ -100,7 +102,6 @@ void printWinner(int scorePlayerOne, int scorePlayerTwo)
 // Ask user for pressing enter
 void waitForEnter()
 {
-    printf("\nPress [Enter] key to exit.\n");
     fflush(stdin); // option ONE to clean stdin
     getchar(); // wait for ENTER
 }
