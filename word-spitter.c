@@ -8,7 +8,7 @@ const int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1,
 
 void printGameTitle();
 int computeScore(char word[]);
-void printWinner(int scorePlayerOne, int scorePlayerTwo);
+void printWinner(int scorePlayerOne, int scorePlayerTwo, char playerOneName[50], char playerTwoName[50]);
 void waitForEnter();
 void printPlayerScore(char playerName[50], int finalScore);
 
@@ -19,10 +19,19 @@ int main(void)
     printf("\nPress [Enter] key to start.\n");
     waitForEnter();
 
+    char playerOneName[50];
+    char playerTwoName[50];
+
+    printf("Player One, choose your Name: ");
+    scanf("%s", playerOneName);
+
+    printf("Player Two, choose your Name: ");
+    scanf("%s", playerTwoName);
+    printf("\n");
+
     int scorePlayerOne = 0;
     int scorePlayerTwo = 0;
     int round = 1;
-
     while(round <= 3)
     {
         printf("Round %i\n", round); // Print round
@@ -31,10 +40,10 @@ int main(void)
         char playerOneInput[50];
         char playerTwoInput[50];
 
-        printf("Player 1: ");
+        printf("%s: ", playerOneName);
         scanf("%s", playerOneInput);
 
-        printf("Player 2: ");
+        printf("%s: ", playerTwoName);
         scanf("%s", playerTwoInput);
         printf("\n");
 
@@ -43,14 +52,14 @@ int main(void)
         scorePlayerTwo += computeScore(playerTwoInput);
 
         // Print current scores
-        printPlayerScore("Player One", scorePlayerOne);
-        printPlayerScore("Player Two", scorePlayerTwo);
+        printPlayerScore(playerOneName, scorePlayerOne);
+        printPlayerScore(playerTwoName, scorePlayerTwo);
         printf("\n");
 
         round++;
     }
 
-    printWinner(scorePlayerOne, scorePlayerTwo);
+    printWinner(scorePlayerOne, scorePlayerTwo, playerOneName, playerTwoName);
 
     printf("\nPress [Enter] key to exit.\n");
     waitForEnter();
@@ -86,15 +95,15 @@ int computeScore(char word[])
 }
 
 // Print the winner
-void printWinner(int scorePlayerOne, int scorePlayerTwo)
+void printWinner(int scorePlayerOne, int scorePlayerTwo, char playerOneName[50], char playerTwoName[50])
 {
     if (scorePlayerOne > scorePlayerTwo)
     {
-        printf("Result: Player 1 wins!\n");
+        printf("Result: %s wins!\n", playerOneName);
     }
     else if (scorePlayerOne < scorePlayerTwo)
     {
-        printf("Result: Player 2 wins!\n");
+        printf("Result: %s wins!\n", playerTwoName);
     }
     else
     {
