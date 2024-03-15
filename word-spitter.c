@@ -16,7 +16,7 @@ int main(void)
 {
     printGameTitle();
 
-    printf("\nPress [Enter] key to start.\n");
+    printf("\nPress [Enter] key to start the game.\n");
     waitForEnter();
 
     char playerOneName[50];
@@ -68,7 +68,7 @@ int main(void)
 // Prints Word Spitter title in ASCII art
 void printGameTitle()
 {
-
+    printf("Welcome to...\n");
     printf("__      __              _        ___  _ __  _  _    _             \n"
                   "\\ \\    / / ___  _ _  __| |      / __|| '_ \\(_)| |_ | |_  ___  _ _ \n"
                   " \\ \\/\\/ / / _ \\| '_|/ _` |      \\__ \\| .__/| ||  _||  _|/ -_)| '_|\n"
