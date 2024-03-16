@@ -11,6 +11,7 @@ int computeScore(char word[]);
 void printWinner(int scorePlayerOne, int scorePlayerTwo, char playerOneName[50], char playerTwoName[50]);
 void waitForEnter();
 void printPlayerScore(char playerName[50], int finalScore);
+void getPlayerName(char playerName[], int playerNumber);
 
 int main(void)
 {
@@ -22,12 +23,8 @@ int main(void)
     char playerOneName[50];
     char playerTwoName[50];
 
-    printf("Player One, choose your Name: ");
-    scanf("%s", playerOneName);
-
-    printf("Player Two, choose your Name: ");
-    scanf("%s", playerTwoName);
-    printf("\n");
+    getPlayerName(playerOneName, 1);
+    getPlayerName(playerTwoName, 2);
 
     int scorePlayerOne = 0;
     int scorePlayerTwo = 0;
@@ -114,7 +111,7 @@ void printWinner(int scorePlayerOne, int scorePlayerTwo, char playerOneName[50],
 // Ask user for pressing enter
 void waitForEnter()
 {
-    fflush(stdin); // option ONE to clean stdin
+    fflush(stdin); // clean stdin
     getchar(); // wait for ENTER
 }
 
@@ -123,3 +120,11 @@ void printPlayerScore(char playerName[50], int finalScore)
 {
     printf("%s scored %i points. \n", playerName, finalScore);
 }
+
+void getPlayerName(char playerName[], int playerNumber)
+{
+    printf("Player %i, choose your Name: ", playerNumber);
+    scanf("%s", playerName);
+    printf("\n");
+}
+
