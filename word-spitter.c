@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdbool.h>
+#include <conio.h>
 
 // This array's length is equal to the English alphabet's length (0-25)
 const int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1,
@@ -12,13 +14,23 @@ void printWinner(int scorePlayerOne, int scorePlayerTwo, char playerOneName[50],
 void waitForEnter();
 void printPlayerScore(char playerName[50], int finalScore);
 void getPlayerName(char playerName[], int playerNumber);
+int multipleChoice(bool canCancel, const char *options[]);
+void clearScreen();
+
+#define OPTIONS_COUNT 2
 
 int main(void)
 {
     printGameTitle();
 
-    printf("\nPress [Enter] key to start the game.\n");
-    waitForEnter();
+    const char *options[OPTIONS_COUNT] = {"START", "QUIT"};
+    int choice = multipleChoice(true, options);
+
+    if (strcmp(options[choice], "QUIT") == 0)
+    {
+        printf("Come back later!\n");
+        return 1;
+    }
 
     char playerOneName[50];
     char playerTwoName[50];
@@ -67,9 +79,9 @@ void printGameTitle()
 {
     printf("Welcome to...\n");
     printf("__      __              _        ___  _ __  _  _    _             \n"
-                  "\\ \\    / / ___  _ _  __| |      / __|| '_ \\(_)| |_ | |_  ___  _ _ \n"
-                  " \\ \\/\\/ / / _ \\| '_|/ _` |      \\__ \\| .__/| ||  _||  _|/ -_)| '_|\n"
-                  "  \\_/\\_/  \\___/|_|  \\__/_|      |___/|_|   |_| \\__| \\__|\\___||_|  \n");
+           "\\ \\    / / ___  _ _  __| |      / __|| '_ \\(_)| |_ | |_  ___  _ _ \n"
+           " \\ \\/\\/ / / _ \\| '_|/ _` |      \\__ \\| .__/| ||  _||  _|/ -_)| '_|\n"
+           "  \\_/\\_/  \\___/|_|  \\__/_|      |___/|_|   |_| \\__| \\__|\\___||_|  \n");
 }
 
 // Computes the final score using POINTS array
@@ -121,6 +133,8 @@ void printPlayerScore(char playerName[50], int finalScore)
     printf("%s scored %i points. \n", playerName, finalScore);
 }
 
+
+
 void getPlayerName(char playerName[], int playerNumber)
 {
     printf("Player %i, choose your Name: ", playerNumber);
@@ -128,3 +142,57 @@ void getPlayerName(char playerName[], int playerNumber)
     printf("\n");
 }
 
+void clearScreen() {
+    for (int i = 0; i < 50; i++)
+        printf("\n");
+}
+
+int multipleChoice(bool canCancel, const char *options[]) {
+    const int startX = 0;
+    const int startY = 8;
+    const int spacingPerLine = 14;
+
+    int currentSelection = 0;
+    int i;
+
+    do {
+        clearScreen(); // Clear the screen
+
+        for (i = 0; i < OPTIONS_COUNT; i++) {
+            printf("%*s", startX, ""); // Set cursor on the right position
+
+            if(i == currentSelection)
+                printf("\033[0;31m"); // Set red color
+
+            printf("%s\n", options[i]);
+            printf("\033[0m"); // Reset color
+        }
+
+        int key = _getch(); // Read the key from console
+
+        switch (key) {
+            case 224: // Recognize arrow keys
+            case 0:
+                key = _getch();
+                switch (key) {
+                    case 72: // Up arrow key
+                        if (currentSelection > 0)
+                            currentSelection--;
+                        break;
+                    case 80: // Down arrow key
+                        if (currentSelection < OPTIONS_COUNT - 1)
+                            currentSelection++;
+                        break;
+                }
+                break;
+            case 13: // Enter
+                return currentSelection;
+            case 27: // Escape
+                if (canCancel)
+                    return -1;
+                break;
+        }
+    } while (1);
+
+    return currentSelection;
+}
