@@ -15,14 +15,13 @@ void waitForEnter();
 void printPlayerScore(char playerName[50], int finalScore);
 void getPlayerName(char playerName[], int playerNumber);
 int multipleChoice(bool canCancel, const char *options[]);
-void clearScreen();
+void clearConsole();
+
 
 #define OPTIONS_COUNT 2
 
 int main(void)
 {
-    printGameTitle();
-
     const char *options[OPTIONS_COUNT] = {"START", "QUIT"};
     int choice = multipleChoice(true, options);
 
@@ -133,8 +132,6 @@ void printPlayerScore(char playerName[50], int finalScore)
     printf("%s scored %i points. \n", playerName, finalScore);
 }
 
-
-
 void getPlayerName(char playerName[], int playerNumber)
 {
     printf("Player %i, choose your Name: ", playerNumber);
@@ -142,22 +139,18 @@ void getPlayerName(char playerName[], int playerNumber)
     printf("\n");
 }
 
-void clearScreen() {
-    for (int i = 0; i < 50; i++)
-        printf("\n");
+void clearConsole() {
+    printf("\033c");
 }
 
 int multipleChoice(bool canCancel, const char *options[]) {
     const int startX = 0;
-    const int startY = 8;
-    const int spacingPerLine = 14;
 
     int currentSelection = 0;
     int i;
 
     do {
-        clearScreen(); // Clear the screen
-
+        printGameTitle();
         for (i = 0; i < OPTIONS_COUNT; i++) {
             printf("%*s", startX, ""); // Set cursor on the right position
 
@@ -192,6 +185,7 @@ int multipleChoice(bool canCancel, const char *options[]) {
                     return -1;
                 break;
         }
+        clearConsole();
     } while (1);
 
     return currentSelection;
