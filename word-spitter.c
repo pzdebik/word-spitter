@@ -140,7 +140,7 @@ void getPlayerName(char playerName[], int playerNumber)
 }
 
 void clearConsole() {
-    printf("\033c");
+    printf("\033c"); // Reset all terminal settings to default
 }
 
 int multipleChoice(bool canCancel, const char *options[]) {
