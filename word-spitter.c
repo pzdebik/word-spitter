@@ -18,17 +18,35 @@ int multipleChoice(bool canCancel, const char *options[]);
 void clearConsole();
 
 
-#define OPTIONS_COUNT 2
+#define OPTIONS_COUNT 3
 
 int main(void)
 {
-    const char *options[OPTIONS_COUNT] = {"START", "QUIT"};
+    const char *options[OPTIONS_COUNT] = {"START", "HOW TO PLAY", "QUIT"};
     int choice = multipleChoice(true, options);
 
     if (strcmp(options[choice], "QUIT") == 0)
     {
         printf("Come back later!\n");
-        return 1;
+        return 0;
+    }
+    else if (strcmp(options[choice], "HOT TO PLAY") == 1)
+    {
+        printf("\nJust write something...\n");
+    }
+
+    char answer[1];
+    printf("\nDo you want to go back to the selection screen? (Y/N): ");
+    scanf("%s", answer);
+
+    if (strcmp(answer, "y") == 0) {
+        clearConsole();
+        main();
+    }
+    else
+    {
+        printf("\nThen what don't you understand?\n");
+        return 0;
     }
 
     printf("\n");
