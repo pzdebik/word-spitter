@@ -31,6 +31,8 @@ int main(void)
         return 1;
     }
 
+    printf("\n");
+
     char playerOneName[50];
     char playerTwoName[50];
 
@@ -40,6 +42,8 @@ int main(void)
     int scorePlayerOne = 0;
     int scorePlayerTwo = 0;
     int round = 1;
+
+    printf("\n");
     while(round <= 3)
     {
         printf("Round %i\n", round); // Print round
@@ -136,7 +140,6 @@ void getPlayerName(char playerName[], int playerNumber)
 {
     printf("Player %i, choose your Name: ", playerNumber);
     scanf("%s", playerName);
-    printf("\n");
 }
 
 void clearConsole() {
@@ -151,6 +154,7 @@ int multipleChoice(bool canCancel, const char *options[]) {
 
     do {
         printGameTitle();
+        printf("\n");
         for (i = 0; i < OPTIONS_COUNT; i++) {
             printf("%*s", startX, ""); // Set cursor on the right position
 
