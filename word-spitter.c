@@ -30,12 +30,12 @@ int main(void)
         printf("Come back later!\n");
         return 0;
     }
-    else if (strcmp(options[choice], "HOT TO PLAY") == 1)
+    else if (strcmp(options[choice], "HOW TO PLAY") == 1)
     {
         printf("\nJust write something...\n");
     }
 
-    char answer[1];
+    char answer[2];
     printf("\nDo you want to go back to the selection screen? (Y/N): ");
     scanf("%s", answer);
 
