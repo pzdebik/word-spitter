@@ -24,29 +24,30 @@ int main(void)
 {
     const char *options[OPTIONS_COUNT] = {"START", "HOW TO PLAY", "QUIT"};
     int choice = multipleChoice(true, options);
+    char answer[2];
 
     if (strcmp(options[choice], "QUIT") == 0)
     {
         printf("Come back later!\n");
         return 0;
     }
-    else if (strcmp(options[choice], "HOW TO PLAY") == 1)
+    else if (strcmp(options[choice], "HOW TO PLAY") == 0)
     {
         printf("\nJust write something...\n");
-    }
 
-    char answer[2];
-    printf("\nDo you want to go back to the selection screen? (Y/N): ");
-    scanf("%s", answer);
+        printf("\nDo you want to go back to the selection screen? (y/n): ");
+        scanf("%s", answer);
 
-    if (strcmp(answer, "y") == 0) {
-        clearConsole();
-        main();
-    }
-    else
-    {
-        printf("\nThen what don't you understand?\n");
-        return 0;
+        if (strcmp(answer, "y") == 0) {
+            clearConsole();
+            main();
+        }
+        else
+        {
+            clearConsole();
+            printf("\nThen what don't you understand?\n");
+            printf("Let's play!\n");
+        }
     }
 
     printf("\n");
