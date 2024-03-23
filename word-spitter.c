@@ -16,23 +16,26 @@ void printPlayerScore(char playerName[50], int finalScore);
 void getPlayerName(char playerName[], int playerNumber);
 int multipleChoice(bool canCancel, const char *options[]);
 void clearConsole();
+void startGame();
 
 
-#define OPTIONS_COUNT 3
+#define OPTIONS_COUNT 4
 
 int main(void)
 {
-    const char *options[OPTIONS_COUNT] = {"START", "HOW TO PLAY", "QUIT"};
+    const char *options[OPTIONS_COUNT] = {"QUICK START", "GAME MODES", "HOW TO PLAY", "QUIT"};
     int choice = multipleChoice(true, options);
     char answer[2];
 
     if (strcmp(options[choice], "QUIT") == 0)
     {
+        clearConsole();
         printf("Come back later!\n");
         return 0;
     }
     else if (strcmp(options[choice], "HOW TO PLAY") == 0)
     {
+        clearConsole();
         printf("\nJust write something...\n");
 
         printf("\nDo you want to go back to the selection screen? (y/n): ");
@@ -49,51 +52,38 @@ int main(void)
             printf("Let's play!\n");
         }
     }
-
-    printf("\n");
-
-    char playerOneName[50];
-    char playerTwoName[50];
-
-    getPlayerName(playerOneName, 1);
-    getPlayerName(playerTwoName, 2);
-
-    int scorePlayerOne = 0;
-    int scorePlayerTwo = 0;
-    int round = 1;
-
-    printf("\n");
-    while(round <= 3)
+    else if (strcmp(options[choice], "GAME MODES") == 0)
     {
-        printf("Round %i\n", round); // Print round
+        char modeNumber[2];
+        clearConsole();
+        printf("1. Two Players\n");
+        printf("2. Three Players\n");
 
-        // Prompt players for words
-        char playerOneInput[50];
-        char playerTwoInput[50];
+        printf("\nChoose your mode (1-2): ");
+        scanf("%s", modeNumber);
 
-        printf("%s: ", playerOneName);
-        scanf("%s", playerOneInput);
-
-        printf("%s: ", playerTwoName);
-        scanf("%s", playerTwoInput);
-        printf("\n");
-
-        // Compute the score of each word
-        scorePlayerOne += computeScore(playerOneInput);
-        scorePlayerTwo += computeScore(playerTwoInput);
-
-        // Print current scores
-        printPlayerScore(playerOneName, scorePlayerOne);
-        printPlayerScore(playerTwoName, scorePlayerTwo);
-        printf("\n");
-
-        round++;
+        if (strcmp(modeNumber, "1") == 0)
+        {
+            clearConsole();
+            startGame();
+        }
+        else if (strcmp(modeNumber, "2") == 0)
+        {
+            clearConsole();
+            startGame();
+        }
+        else
+        {
+            clearConsole();
+            printf("Chosen mode doesn't exist. Try again.\n");
+            printf("Click enter to proceed to the main screen.\n");
+            waitForEnter();
+            main();
+        }
     }
 
-    printWinner(scorePlayerOne, scorePlayerTwo, playerOneName, playerTwoName);
-
-    printf("\nPress [Enter] key to exit.\n");
-    waitForEnter();
+    clearConsole();
+    startGame();
 }
 
 // Prints Word Spitter title in ASCII art
@@ -212,4 +202,50 @@ int multipleChoice(bool canCancel, const char *options[]) {
     } while (1);
 
     return currentSelection;
+}
+
+void startGame()
+{
+    char playerOneName[50];
+    char playerTwoName[50];
+
+    getPlayerName(playerOneName, 1);
+    getPlayerName(playerTwoName, 2);
+
+    int scorePlayerOne = 0;
+    int scorePlayerTwo = 0;
+    int round = 1;
+
+    printf("\n");
+    while(round <= 3)
+    {
+        printf("Round %i\n", round); // Print round
+
+        // Prompt players for words
+        char playerOneInput[50];
+        char playerTwoInput[50];
+
+        printf("%s: ", playerOneName);
+        scanf("%s", playerOneInput);
+
+        printf("%s: ", playerTwoName);
+        scanf("%s", playerTwoInput);
+        printf("\n");
+
+        // Compute the score of each word
+        scorePlayerOne += computeScore(playerOneInput);
+        scorePlayerTwo += computeScore(playerTwoInput);
+
+        // Print current scores
+        printPlayerScore(playerOneName, scorePlayerOne);
+        printPlayerScore(playerTwoName, scorePlayerTwo);
+        printf("\n");
+
+        round++;
+    }
+
+    printWinner(scorePlayerOne, scorePlayerTwo, playerOneName, playerTwoName);
+
+    printf("\nPress [Enter] key to exit.\n");
+    waitForEnter();
 }
