@@ -10,13 +10,11 @@ const int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1,
 
 void printGameTitle();
 int computeScore(char word[]);
-void printWinner(int scorePlayerOne, int scorePlayerTwo, char playerOneName[50], char playerTwoName[50]);
+void startGame(int numberOfPlayers);
 void waitForEnter();
 void printPlayerScore(char playerName[50], int finalScore);
-void getPlayerName(char playerName[], int playerNumber);
 int multipleChoice(bool canCancel, const char *options[]);
 void clearConsole();
-void startGame();
 
 
 #define OPTIONS_COUNT 4
@@ -56,8 +54,8 @@ int main(void)
     {
         char modeNumber[2];
         clearConsole();
-        printf("1. Two Players\n");
-        printf("2. Three Players\n");
+        printf("1. Player vs Player\n");
+        printf("2. Battle Royal\n");
 
         printf("\nChoose your mode (1-2): ");
         scanf("%s", modeNumber);
@@ -65,12 +63,12 @@ int main(void)
         if (strcmp(modeNumber, "1") == 0)
         {
             clearConsole();
-            startGame();
+            startGame(2);
         }
         else if (strcmp(modeNumber, "2") == 0)
         {
             clearConsole();
-            startGame();
+            startGame(10);
         }
         else
         {
@@ -83,7 +81,7 @@ int main(void)
     }
 
     clearConsole();
-    startGame();
+    startGame(2);
 }
 
 // Prints Word Spitter title in ASCII art
@@ -115,23 +113,6 @@ int computeScore(char word[])
     return score;
 }
 
-// Print the winner
-void printWinner(int scorePlayerOne, int scorePlayerTwo, char playerOneName[50], char playerTwoName[50])
-{
-    if (scorePlayerOne > scorePlayerTwo)
-    {
-        printf("Result: %s wins!\n", playerOneName);
-    }
-    else if (scorePlayerOne < scorePlayerTwo)
-    {
-        printf("Result: %s wins!\n", playerTwoName);
-    }
-    else
-    {
-        printf("Result: It's a tie!\n");
-    }
-}
-
 // Ask user for pressing enter
 void waitForEnter()
 {
@@ -143,12 +124,6 @@ void waitForEnter()
 void printPlayerScore(char playerName[50], int finalScore)
 {
     printf("%s scored %i points. \n", playerName, finalScore);
-}
-
-void getPlayerName(char playerName[], int playerNumber)
-{
-    printf("Player %i, choose your Name: ", playerNumber);
-    scanf("%s", playerName);
 }
 
 void clearConsole() {
@@ -204,47 +179,58 @@ int multipleChoice(bool canCancel, const char *options[]) {
     return currentSelection;
 }
 
-void startGame()
+void startGame(int numberOfPlayers)
 {
-    char playerOneName[50];
-    char playerTwoName[50];
+    // Define players
+    char playerNames[numberOfPlayers][50];
+    int scores[numberOfPlayers];
 
-    getPlayerName(playerOneName, 1);
-    getPlayerName(playerTwoName, 2);
+    // Get player's names
+    for (int i = 0; i < numberOfPlayers; i++) {
+        printf("Enter name for Player %d: ", i + 1);
+        scanf("%s", playerNames[i]);
+        scores[i] = 0; // Initialize scores to 0
+    }
 
-    int scorePlayerOne = 0;
-    int scorePlayerTwo = 0;
     int round = 1;
 
     printf("\n");
-    while(round <= 3)
+    while (round <= 3)
     {
         printf("Round %i\n", round); // Print round
 
-        // Prompt players for words
-        char playerOneInput[50];
-        char playerTwoInput[50];
-
-        printf("%s: ", playerOneName);
-        scanf("%s", playerOneInput);
-
-        printf("%s: ", playerTwoName);
-        scanf("%s", playerTwoInput);
+        // Get words from players
+        char playerInputs[numberOfPlayers][50];
+        for (int i = 0; i < numberOfPlayers; i++) {
+            printf("%s: ", playerNames[i]);
+            scanf("%s", playerInputs[i]);
+        }
         printf("\n");
 
-        // Compute the score of each word
-        scorePlayerOne += computeScore(playerOneInput);
-        scorePlayerTwo += computeScore(playerTwoInput);
+        // Count score per each word
+        for (int i = 0; i < numberOfPlayers; i++) {
+            scores[i] += computeScore(playerInputs[i]);
+        }
 
         // Print current scores
-        printPlayerScore(playerOneName, scorePlayerOne);
-        printPlayerScore(playerTwoName, scorePlayerTwo);
+        for (int i = 0; i < numberOfPlayers; i++) {
+            printPlayerScore(playerNames[i], scores[i]);
+        }
         printf("\n");
 
         round++;
     }
 
-    printWinner(scorePlayerOne, scorePlayerTwo, playerOneName, playerTwoName);
+    // Print winner
+    int maxScore = scores[0];
+    int winnerIndex = 0;
+    for (int i = 1; i < numberOfPlayers; i++) {
+        if (scores[i] > maxScore) {
+            maxScore = scores[i];
+            winnerIndex = i;
+        }
+    }
+    printf("Winner: %s\n", playerNames[winnerIndex]);
 
     printf("\nPress [Enter] key to exit.\n");
     waitForEnter();
