@@ -130,6 +130,7 @@ void clearConsole() {
     printf("\033c"); // Reset all terminal settings to default
 }
 
+// Shows game menu
 int multipleChoice(bool canCancel, const char *options[]) {
     const int startX = 0;
 
