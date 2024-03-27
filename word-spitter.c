@@ -67,8 +67,12 @@ int main(void)
         }
         else if (strcmp(modeNumber, "2") == 0)
         {
+            int playerNumber;
             clearConsole();
-            startGame(10);
+            printf("Enter the number of players: ");
+            scanf("%i", &playerNumber);
+            clearConsole();
+            startGame(playerNumber);
         }
         else
         {
