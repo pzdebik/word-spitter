@@ -184,6 +184,7 @@ int multipleChoice(bool canCancel, const char *options[]) {
     return currentSelection;
 }
 
+// Start the game with specified number of players
 void startGame(int numberOfPlayers)
 {
     // Define players
