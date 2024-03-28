@@ -85,7 +85,7 @@ int main(void)
     }
 
     clearConsole();
-    startGame(2);
+    startGame(2); // Start normal mode
 }
 
 // Prints Word Spitter title in ASCII art
