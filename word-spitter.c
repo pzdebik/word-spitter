@@ -16,7 +16,6 @@ void printPlayerScore(char playerName[50], int finalScore);
 int multipleChoice(bool canCancel, const char *options[]);
 void clearConsole();
 
-
 #define OPTIONS_COUNT 4
 
 int main(void)
@@ -137,7 +136,6 @@ void clearConsole() {
 // Shows game menu
 int multipleChoice(bool canCancel, const char *options[]) {
     const int startX = 0;
-
     int currentSelection = 0;
     int i;
 
