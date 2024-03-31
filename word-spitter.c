@@ -18,6 +18,7 @@ void clearConsole();
 
 #define OPTIONS_COUNT 4
 
+// TO DO: Clean the code (uncle's Bob rules) 
 int main(void)
 {
     const char *options[OPTIONS_COUNT] = {"QUICK START", "GAME MODES", "HOW TO PLAY", "QUIT"};
